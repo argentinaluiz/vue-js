@@ -32,7 +32,7 @@ window.billListComponent = Vue.extend({
                                 {{ o.done | doneLabel}}
                             </td>
                             <td>
-                                <a href="#" @click.prevent="loadBill(o)">Editar</a> |
+                                <a v-link="{ name: 'bill.update', params: {index: index} }">Editar</a> |
                                 <a href="#" @click.prevent="deleteBill(o)">Excluir</a>
                             </td>
                         </tr>
@@ -41,35 +41,14 @@ window.billListComponent = Vue.extend({
     ,
     data: function(){
         return {
-            bills: [
-                {date_due: '20/08/2016', name: 'Conta de luz', value: 70.99, done: true},
-                {date_due: '21/08/2016', name: 'Conta de água', value: 50.99, done: false},
-                {date_due: '22/08/2016', name: 'Conta de telefone', value: 55.99, done: false},
-                {date_due: '23/08/2016', name: 'Supermercado', value: 625.99, done: false},
-                {date_due: '24/08/2016', name: 'Cartão de crédito', value: 1500.99, done: false},
-                {date_due: '25/08/2016', name: 'Empréstimo', value: 2000.99, done: false},
-                {date_due: '26/08/2016', name: 'Gasolina', value: 200.00, done: false},
-            ]
+            bills: this.$root.$children[0].bills
         };
     },
     methods: {
-        loadBill: function (bill) {
-            //this.$parent.bill = bill;
-            this.$dispatch('change-bill', bill);
-            //this.$parent.activedView = 1;
-            this.$dispatch('change-activedview', 1);
-            //this.$parent.formType = 'update';
-            this.$dispatch('change-formType', 'update');
-        },
         deleteBill: function (bill) {
             if(confirm('Deseja excluir essa conta?')){
-                this.bills.$remove(bill);
+                bills: this.$root.$children[0].bills.$remove(bill);
             }
         }
-    },
-    events: {
-        'new-bill': function (bill) {
-            this.bills.push(bill);
-        },
     }
 });

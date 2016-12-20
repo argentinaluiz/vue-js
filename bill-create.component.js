@@ -48,33 +48,29 @@ window.billCreateComponent = Vue.extend({
             },
         };
     },
+    created: function () {
+        if(this.$route.name == 'bill.update'){
+            this.formType = 'update';
+            this.getBill(this.$route.params.index);
+        }
+    },
     methods: {
         submit: function () {
             if(this.formType == 'insert'){
-                // $parent.$children[1] - comunicação entre dois componentes irmaos
-                //this.$parent.$refs.billListComponent.bills.push(this.bill);
-                this.$dispatch('new-bill', this.bill);
+                bills: this.$root.$children[0].bills.push(this.bill);
             }
-            //bill da listagem do bill do fromulário (reset no formulario)
-            //isso está resetando no update
 
             this.bill = {
                 date_due: '',
                 name: '',
                 value: 0,
                 done: false,
-            },
-
-                this.$dispatch('change-activedview', 0);
-            //this.$parent.activedView = 0;
+            };
+            this.$router.go({name: 'bill.list'});
         },
-    },
-    events: {
-        'change-formtype': function(formType){
-            this.formType = formType;
-        },
-        'change-bill': function (bill) {
-            this.bill = bill;
-        },
-    },
+        getBill: function (index) {
+            var bills = this.$root.$children[0].bills;
+            this.bills = bills[index];
+        }
+    }
 });

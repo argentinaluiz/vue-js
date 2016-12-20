@@ -4,9 +4,7 @@
 window.appComponent = Vue.extend({
     components: {
         //componentes ficam só acessivel para o appCpmponent e todos são irmãos e filhos de appComponent
-        'menu-component' : menuComponent,
-        'bill-list-component' : billListComponent,
-        'bill-create-component' : billCreateComponent
+        'menu-component' : menuComponent
     },
     template: `            
                 <style type="text/css">
@@ -27,63 +25,30 @@ window.appComponent = Vue.extend({
                 <h3 :class="{'gray': status === false, 'blue': status === 0, 'red': status > 0}">
                     {{ status | statusGeneral }}
                 </h3>
-                <!-- v-ref é um apelido para o componente para ajudar a achar os filhos -->
                 <menu-component></menu-component>  
                 <router-view></router-view>
-                <!-- v-if mata totalmente o componente, então é melhor usar o v-show do vue que carrega 
-                 o componente mas esconde ele fica display: none -->
-                <!--<div v-if="activedView == 0">
-                <div v-show="activedView == 0">
-                    <bill-list-component v-ref:bill-list-component></bill-list-component>
-                </div>
-                
-                <div v-show="activedView == 1">
-                <!-- 
-                    sync sincroniza e não deixa apagar
-                    
-                 
-                   <bill-create-component :bill.sync="bill"></bill-create-component>
-                </div>-->
                 `,
     data: function(){
         return {
-            title: "Contas a pagar",
-            activedView: 0
+            title: "Contas a pagar"
         };
     },
     computed: {
         status:function () {
-            var billListComponent = this.$refs.billListComponent;
-
-            if(!billListComponent.bills.length){
+            var bills = this.$root.$children[0].bills;
+            if(!bills.length){
                 //!this.bills.length mesma coisa que se não tiver tamanho (vazio)
                 return false;
             }
 
             var count = 0;
 
-            for(var i in billListComponent.bills){
-                if(!billListComponent.bills[i].done){
+            for(var i in bills){
+                if(!bills[i].done){
                     count++;
                 }
             }
             return count;
         }
-    },
-    methods: {},
-    events: {
-        'change-activedview': function(activedView){
-            this.activedView = activedView;
-        },
-        'change-formtype': function(formType){
-            //this.formType = formType;
-            this.$broadcast('change-formtype', formType);
-        },
-        'change-bill': function (bill) {
-            this.$broadcast('change-bill', bill);
-        },
-        'new-bill': function (bill) {
-            this.$broadcast('new-bill', bill);
-        },
-    },
+    }
 });
