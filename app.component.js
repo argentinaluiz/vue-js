@@ -32,7 +32,7 @@ window.appComponent = Vue.extend({
                 <router-view></router-view>
                 <!-- v-if mata totalmente o componente, então é melhor usar o v-show do vue que carrega 
                  o componente mas esconde ele fica display: none -->
-                <!--<div v-if="activedView == 0">-->
+                <!--<div v-if="activedView == 0">
                 <div v-show="activedView == 0">
                     <bill-list-component v-ref:bill-list-component></bill-list-component>
                 </div>
@@ -41,9 +41,9 @@ window.appComponent = Vue.extend({
                 <!-- 
                     sync sincroniza e não deixa apagar
                     
-                 -->
+                 
                    <bill-create-component :bill.sync="bill"></bill-create-component>
-                </div>
+                </div>-->
                 `,
     data: function(){
         return {

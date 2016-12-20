@@ -1,0 +1,9 @@
+# ignorar arquivo .idea
+
+.idea/
+
+# ignorar pasta do node
+
+node_modules/
+
+
