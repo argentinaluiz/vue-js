@@ -1,7 +1,7 @@
 /**
  * Created by osmar on 15/12/2016.
  */
-window.billListComponent = Vue.extend({
+window.billPayListComponent = Vue.extend({
     template: ` 
             <style type="text/css">
                     .pago{
@@ -32,7 +32,7 @@ window.billListComponent = Vue.extend({
                                 {{ o.done | doneLabel}}
                             </td>
                             <td>
-                                <a v-link="{ name: 'bill.update', params: {index: index} }">Editar</a> |
+                                <a v-link="{ name: 'bill-pay.update', params: {index: index} }">Editar</a> |
                                 <a href="#" @click.prevent="deleteBill(o)">Excluir</a>
                             </td>
                         </tr>
@@ -41,13 +41,13 @@ window.billListComponent = Vue.extend({
     ,
     data: function(){
         return {
-            bills: this.$root.$children[0].bills
+            bills: this.$root.$children[0].billsPay
         };
     },
     methods: {
         deleteBill: function (bill) {
             if(confirm('Deseja excluir essa conta?')){
-                bills: this.$root.$children[0].bills.$remove(bill);
+                bills: this.$root.$children[0].billsPay.$remove(bill);
             }
         }
     }

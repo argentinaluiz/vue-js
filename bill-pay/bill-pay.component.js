@@ -1,10 +1,10 @@
 /**
  * Created by osmar on 15/12/2016.
  */
-window.appComponent = Vue.extend({
+window.billPayComponent = Vue.extend({
     components: {
         //componentes ficam só acessivel para o appCpmponent e todos são irmãos e filhos de appComponent
-        'menu-component' : menuComponent
+        'menu-component' : billPayMenuComponent
     },
     template: `            
                 <style type="text/css">
@@ -35,7 +35,7 @@ window.appComponent = Vue.extend({
     },
     computed: {
         status:function () {
-            var bills = this.$root.$children[0].bills;
+            var bills = this.$root.$children[0].billsPay;
             if(!bills.length){
                 //!this.bills.length mesma coisa que se não tiver tamanho (vazio)
                 return false;
