@@ -38,7 +38,7 @@ router.map({
              },
         }
     },
-    'bill-receives': {
+    '/bill-receives': {
         name: 'bill-receive',
         component: billReceiveComponent
     },

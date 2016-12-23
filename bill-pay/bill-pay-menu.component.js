@@ -6,7 +6,7 @@ window.billPayMenuComponent = Vue.extend({
     <nav>
         <ul>
             <li v-for="o in menus">
-                <a v-link="{path: o.url}">{{ o.name }}</a>
+                <a v-link="{name: o.url}">{{ o.name }}</a>
             </li>
         </ul>
     </nav>
